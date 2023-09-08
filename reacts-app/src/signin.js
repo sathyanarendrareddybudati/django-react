@@ -2,12 +2,15 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const initialValues = {
     email: '',
     password: '',
   };
+
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Required'),
@@ -18,11 +21,10 @@ const LoginForm = () => {
     try {
         const response = await axios.post('http://127.0.0.1:8000/login/', values);
         const { token, msg } = response.data;
-        console.log('Response:', response); // Log the entire response object
+        console.log('Response:', response); 
         console.log('Token:', token);
         console.log('Registration Message:', msg);
-      // Send a POST request to your login API endpoint.
-      // Handle successful login or display an error message.
+        navigate('/dashboard');
     } catch (error) {
       console.error('Error:', error);
     }

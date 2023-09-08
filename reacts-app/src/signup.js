@@ -34,7 +34,7 @@ const SignupForm = () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/register/', values);
       const { token, msg } = response.data;
-      console.log('Response:', response); // Log the entire response object
+      console.log('Response:', response); 
       console.log('Token:', token);
       console.log('Registration Message:', msg);
       navigate('/login');
